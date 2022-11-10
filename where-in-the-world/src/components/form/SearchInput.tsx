@@ -1,32 +1,35 @@
-import React from 'react'
+import React, { FormEvent, FormEventHandler, SyntheticEvent } from 'react'
 import IconName from '../../util/enum/iconName';
 import iconProvider from '../../util/providers/iconProvider';
 
 const { useState } = React;
 
-const SearchInput = () => {
-    const [input, setInput] = useState('');
+interface SearchInputProps {
+    onSearch: (input: string) => void;
+}
 
-    const submitHandler = (e: any) => {
-        e.preventdefault();
-        //TODO: add logic for searching
-        //TODO: set type
+const SearchInput = ({ onSearch }: SearchInputProps) => {
+    const [input, setInput] = useState<string>('');
+
+    const submitHandler = (e: SyntheticEvent) => {
+        console.log("in submithandler");
+        e.preventDefault();
+        onSearch(input)
     }
+    console.log({ input });
+    return <form onSubmit={submitHandler}>
+        <div className='search__container'>
+            {iconProvider.getImage(IconName.LOOP)}
+            {/* TODO: if time i18n */}
+            <input
+                type={"text"}
+                placeholder="Search for a country..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+            />
+        </div>
+    </form>
 
-    return (
-        <form onSubmit={submitHandler}>
-            <div>
-                {iconProvider.getImage(IconName.BACKARROW)}
-                {/* TODO: if time i18n */}
-                <input
-                    type={"text"}
-                    placeholder="Search for a country..."
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                />
-            </div>
-        </form>
-    )
 }
 
 export default SearchInput

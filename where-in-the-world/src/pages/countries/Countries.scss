@@ -1,12 +1,16 @@
 .countries__container {
     display: flex;
-    margin-top: 150px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
+    padding: 0px 60px;
 }
 
 .countries__filters {
     display: flex;
+    flex-direction: row;
     height: 80px;
-    background-color: red;
 }
 
 .countries__cards {
@@ -14,4 +18,12 @@
     flex-wrap: wrap;
     column-gap: 2rem;
     row-gap: 2rem;
+}
+
+.countries__search {
+    width: 40%;
+}
+
+.countries__cmb {
+    width: 10%;
 }

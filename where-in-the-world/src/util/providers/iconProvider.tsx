@@ -3,8 +3,8 @@ import IconName from '../enum/iconName';
 import { Dictionary } from '../type/DictionaryData';
 import { FaMoon, FaArrowLeft, FaSearch } from 'react-icons/fa';
 
-const moon = <FaMoon color='white' />
-const backArrow = <FaArrowLeft color='white' />
+const moon = <FaMoon />
+const backArrow = <FaArrowLeft />
 const loop = <FaSearch />
 
 class IconProvider {

@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import CountryCard from '../../components/card/CountryCard';
+import Cmb from '../../components/form/Cmb';
+import SearchInput from '../../components/form/SearchInput';
 import { getAllCountriesURL } from '../../util/endpoints'
 import { CountryData } from '../../util/type/CountryData';
 
 const { useState, useEffect } = React;
 
 const Countries = () => {
-
+    //TODO: implement shadows on elements
     const [countries, setCountries] = useState<CountryData[]>([]);
-    const [error, setError] = useState("");
+    const [filter, setFilter] = useState<string>("")
+    const [regionFilter, setRegionFilter] = useState<string>("")
+    const [error, setError] = useState<string>("");
 
     const getCountries = async () => {
         try {
@@ -30,25 +34,34 @@ const Countries = () => {
         getCountries();
     }, [])
 
+    const filteredCountriesByRegion = regionFilter ? countries.filter((country) => country.region.trim().toLowerCase() === regionFilter.toLowerCase()) : countries;
+    const filteredCountries = filter ? filteredCountriesByRegion.filter(x => x.name.trim().toLowerCase().includes(filter)) : filteredCountriesByRegion;
 
     return (
         <div className='countries__container'>
             <div className='countries__filters'>
-                <div>
-                    {/* //TODO: Add input field for search in seperate component */}
+                <div className='countries__search'>
+                    <SearchInput onSearch={setFilter} />
                 </div>
-                <div>
-                    {/* TODO: Add combobox for regions in seperate component */}
+                <div className='countries__cmb'>
+                    <Cmb
+                        name={'regions'}
+                        id={'regions'}
+                        options={["Africa", "America", "Asia", "Europe", "Oceania"]}
+                        onSelect={setRegionFilter}
+                        placeHolder={'Filter by Region'}
+                    />
                 </div>
             </div>
             <div className='countries__cards'>
                 {
-                    countries.map(({ flag,
+                    filteredCountries?.map(({ flag,
                         name,
                         population,
                         region,
-                        capital }) => (
+                        capital }, idx) => (
                         <CountryCard
+                            key={idx}
                             flagUrl={flag}
                             countryName={name}
                             population={population}
