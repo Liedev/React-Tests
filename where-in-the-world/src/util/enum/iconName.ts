@@ -1,7 +1,8 @@
 enum IconName {
     MOON,
     SUN,
-    BACKARROW
+    BACKARROW,
+    LOOP
 }
 
 export default IconName;

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import IconName from '../enum/iconName';
 import { Dictionary } from '../type/DictionaryData';
-import { FaMoon, FaArrowLeft } from 'react-icons/fa';
+import { FaMoon, FaArrowLeft, FaSearch } from 'react-icons/fa';
 
 const moon = <FaMoon color='white' />
 const backArrow = <FaArrowLeft color='white' />
+const loop = <FaSearch />
 
 class IconProvider {
     icons: Dictionary<JSX.Element>;
@@ -12,6 +13,7 @@ class IconProvider {
         this.icons = {};
         this.icons[IconName.MOON] = moon;
         this.icons[IconName.BACKARROW] = backArrow;
+        this.icons[IconName.LOOP] = loop;
     }
 
     getImage(name: IconName) {
