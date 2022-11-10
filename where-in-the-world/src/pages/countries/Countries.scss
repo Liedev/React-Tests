@@ -1,0 +1,18 @@
+.countries__container {
+    display: flex;
+    margin-top: 150px;
+}
+
+.countries__filters {
+    // add styling
+    display: flex;
+    height: 80px;
+    background-color: red;
+}
+
+.countries__cards {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}

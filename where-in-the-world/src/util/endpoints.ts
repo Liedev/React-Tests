@@ -1,0 +1,1 @@
+export const getAllCountriesURL = 'https://restcountries.com/v2/all'
