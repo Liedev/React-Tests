@@ -4,14 +4,15 @@ import iconProvider from '../../util/providers/iconProvider';
 
 interface IconButtonProps {
     text: string;
-    iconName?: IconName;
+    iconEnum?: IconName;
+    buttonClass: string;
     handleClick: () => void;
 }
 
 const IconButton = (props: IconButtonProps) => {
     return (
-        <button className={'buttonContainer'} onClick={props.handleClick}>
-            {props.iconName && iconProvider.getImage(props.iconName)}
+        <button className={`${props.buttonClass}`} onClick={props.handleClick}>
+            {props.iconEnum >= 0 && iconProvider.getImage(props.iconEnum)}
             {props.text}
         </button>
     )

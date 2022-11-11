@@ -14,7 +14,7 @@ export interface CountryData {
     flags: { svg: string, png: string };
     independent: boolean;
     //TODO: check if i need this, if so put in different file
-    languages: { iso639_1: string; iso639_2: string; name: string; nativeName: string };
+    languages: { iso639_1: string; iso639_2: string; name: string; nativeName: string }[];
     latlng: number[];
     name: string;
     nativeName: string;

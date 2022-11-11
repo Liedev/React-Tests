@@ -9,6 +9,7 @@ interface SearchInputProps {
 }
 
 const SearchInput = ({ onSearch }: SearchInputProps) => {
+    //TODO: useref?
     const [input, setInput] = useState<string>('');
 
     const submitHandler = (e: SyntheticEvent) => {
