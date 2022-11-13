@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import IconButton from '../../components/button/IconButton';
+import { CountriesContext } from '../../context/countryContext';
 import { getAllCountriesURL, getCountryByNameURL } from '../../util/endpoints';
 import IconName from '../../util/enum/iconName';
 import { arrayToNameString } from '../../util/helper/helper';
@@ -12,6 +13,8 @@ const Country = () => {
     const [country, setCountry] = useState<CountryData>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+
+    const { countries } = useContext(CountriesContext)
 
     const navigate = useNavigate();
 
@@ -31,13 +34,13 @@ const Country = () => {
 
     const getCountry = async (name: string = countryName) => {
         try {
-            const data = await Promise.all([
+            const data = await Promise.all([countries ? countries :
                 fetch(getAllCountriesURL)
                     .then((response) => response.json())
                     .catch(() => { throw new Error(errorMessage) }),
-                fetch(`${getCountryByNameURL}/${name}`)
-                    .then((response) => response.json())
-                    .catch(() => { throw new Error(errorMessage) })
+            fetch(`${getCountryByNameURL}/${name}`)
+                .then((response) => response.json())
+                .catch(() => { throw new Error(errorMessage) })
             ])
             const [countriesData, countryData] = data;
             const country: CountryData = countryData.find((country: CountryData) => country?.name.toLowerCase() === name.toLowerCase())
