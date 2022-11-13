@@ -17,17 +17,19 @@ const Cmb = (props: CmbProps) => {
     const toggle = () => {
         setIsOpen(prev => !prev)
     }
-    //TODO: Add onBlur
+
     const handleSelection = (e: BaseSyntheticEvent) => {
-        if (e.target.value) {
-            props.onSelect(e.target.value);
-            setSelectedValue(e.target.value);
+        if (e.target.innerHTML) {
+            props.onSelect(e.target.innerHTML);
+            setSelectedValue(e.target.innerHTML);
         }
         toggle();
     }
 
     return (
-        <>
+        <div
+            tabIndex={0}
+            onBlur={toggle}>
             <div
                 className='custom-select__select'
                 onClick={toggle}
@@ -35,12 +37,12 @@ const Cmb = (props: CmbProps) => {
                 {selectedValue}
                 <span className='custom-select__select__icon'> {iconProvider.getImage(IconName.CHEVRONDOWN)}</span>
             </div>
-            {isOpen && <div className='custom-select__options'>
+            {isOpen && <ul onFocus={() => console.log("focus")} className='custom-select__options'>
                 {props.options.map((option: string) => (
-                    <button key={option} value={option} onClick={handleSelection}>{option}</button>
+                    <li key={option} onClick={handleSelection}>{option}</li>
                 ))}
-            </div>}
-        </>
+            </ul>}
+        </div>
     )
 }
 

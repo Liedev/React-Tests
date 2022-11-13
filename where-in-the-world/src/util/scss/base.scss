@@ -6,7 +6,6 @@ body {
     font-family: 'Nunito Sans', sans-serif;
     padding: 0;
     margin: 0;
-    background-color: $dark-mode-background;
 }
 
 a {
@@ -15,7 +14,6 @@ a {
 
 .container {
     display: flex;
-    height: 100%;
 }
 
 .header {
