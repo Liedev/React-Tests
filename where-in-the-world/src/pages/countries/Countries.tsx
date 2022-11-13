@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useReducer } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import CountryCard from '../../components/card/CountryCard';
 import Cmb from '../../components/form/Cmb';
@@ -9,28 +9,24 @@ import { CountryData } from '../../util/type/CountryData';
 
 const { useState, useEffect } = React;
 
-interface CountryProps {
-    countries: CountryData[]
-}
-
 const Countries = () => {
-    //TODO: implement shadows on elements
-    //const [countries, setCountries] = useState<CountryData[]>([]);
-    const [filter, setFilter] = useState<string>("")
-    const [regionFilter, setRegionFilter] = useState<string>("")
+    const COUNTRYREGION = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+    const [filter, setFilter] = useState<string>('')
+    const [regionFilter, setRegionFilter] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<string>('');
 
     const { countries, setCountries } = useContext(CountriesContext);
 
     const getCountries = async () => {
         try {
             const res = await fetch(getAllCountriesURL)
+
             if (!res.ok) {
                 throw new Error('Something went wrong. Could not get all the countries.');
             }
             const data: CountryData[] = await res.json();
-            console.log(data);
+
             setCountries(data);
             setLoading(false);
         } catch (error) {
@@ -40,9 +36,10 @@ const Countries = () => {
     }
 
     useEffect(() => {
-        //TODO: Figure out if i still need this in react 18
-        setLoading(true);
-        getCountries();
+        if (!countries) {
+            setLoading(true);
+            getCountries();
+        }
     }, [])
 
     const filteredCountriesByRegion: CountryData[] = regionFilter ? countries.filter((country: CountryData) => country.region.trim().toLowerCase() === regionFilter.toLowerCase()) : countries;
@@ -58,7 +55,7 @@ const Countries = () => {
 
     return (
         <div className='countries__container'>
-            <div className='countries__filters'>
+            <header className='countries__filters'>
                 <div className='countries__search'>
                     <SearchInput onSearch={setFilter} />
                 </div>
@@ -66,17 +63,18 @@ const Countries = () => {
                     <Cmb
                         name={'regions'}
                         id={'regions'}
-                        options={["Africa", "America", "Asia", "Europe", "Oceania"]}
+                        options={COUNTRYREGION}
                         onSelect={setRegionFilter}
                         placeHolder={'Filter by Region'}
                     />
                 </div>
-            </div>
-            <div className='countries__cards'>
+            </header>
+            <section className='countries__cards'>
                 {
                     loading && !error ?
                         <p>Loading...</p> :
-                        filteredCountries?.map(({ flag,
+                        filteredCountries?.map(({
+                            flag,
                             name,
                             population,
                             region,
@@ -92,7 +90,7 @@ const Countries = () => {
                             </Link>
                         ))
                 }
-            </div>
+            </section>
         </div>
     )
 }

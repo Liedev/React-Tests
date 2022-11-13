@@ -3,7 +3,7 @@ enum IconName {
     SUN,
     BACKARROW,
     LOOP,
-    TEST
+    CHEVRONDOWN
 }
 
 export default IconName;

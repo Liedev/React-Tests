@@ -1,1 +1,1 @@
-export const arrayToNameString = (items: any) => items.map((item: any) => item.name).toString();
+export const arrayToNameString = (items: any) => items.map((item: any) => ` ${item.name}`).toString();

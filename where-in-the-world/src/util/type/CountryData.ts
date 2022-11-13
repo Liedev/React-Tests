@@ -1,3 +1,9 @@
+import { CurrencyData } from "./CurrencyData";
+import { FlagData } from "./FlagData";
+import { LanguagesData } from "./LanguagesData";
+import { regionalBlocsData } from "./RegionalBlocsData";
+import { TranslationsData } from "./TranslationsData";
+
 export interface CountryData {
     alpha2Code: string;
     alpha3Code: string;
@@ -7,37 +13,21 @@ export interface CountryData {
     callingCodes: string[];
     capital: string;
     cioc: string;
-    //TODO: check if i need this, if so put in different file
-    currencies: { code: string; name: string; symbol: string; }[]
+    currencies: CurrencyData[]
     demonym: string
     flag: string;
-    flags: { svg: string, png: string };
+    flags: FlagData;
     independent: boolean;
-    //TODO: check if i need this, if so put in different file
-    languages: { iso639_1: string; iso639_2: string; name: string; nativeName: string }[];
+    languages: LanguagesData[];
     latlng: number[];
     name: string;
     nativeName: string;
     numericCode: string;
     population: number;
     region: string;
-    //TODO: check if i need this, if so put in different file
-    regionalBlocs: { acronym: string; name: string };
+    regionalBlocs: regionalBlocsData;
     subregion: string;
     timezones: string;
     topLevelDomain: string[];
-    //TODO: check if i need this, if so put in different file
-    translations: {
-        br: string;
-        de: string;
-        es: string;
-        fa: string;
-        fr: string;
-        hr: string;
-        hu: string;
-        it: string;
-        ja: string;
-        nl: string;
-        pt: string;
-    }
+    translations: TranslationsData
 }

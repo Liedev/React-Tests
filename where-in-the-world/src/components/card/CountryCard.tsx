@@ -9,7 +9,6 @@ interface CountryCardProps {
 }
 
 const CountryCard = ({ flagUrl, countryName, population, region, capital }: CountryCardProps) => {
-    //TODO: rerenders
     return (
         <div className='country__card'>
             <img className='country__header' src={flagUrl} alt={countryName} />

@@ -1,2 +1,2 @@
 export const getAllCountriesURL = 'https://restcountries.com/v2/all';
-export const getCountryByName = 'https://restcountries.com/v2/name';
+export const getCountryByNameURL = 'https://restcountries.com/v2/name';
