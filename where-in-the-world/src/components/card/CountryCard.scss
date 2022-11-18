@@ -1,0 +1,32 @@
+.country__card {
+    font-size: 14px;
+    width: 250px;
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.country__header {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+}
+
+.country__body {
+    width: 100%;
+    height: 50%;
+    padding: 20px;
+}
+
+.country__title {
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.country__body ul {
+    list-style-type: none;
+    line-height: 150%;
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+}
